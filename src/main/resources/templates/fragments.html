@@ -6,6 +6,7 @@
         <ul>
             <li><a th:href="@{/}">Welkom</a></li>
             <li><a th:href="@{/pizzas}">Pizza's</a></li>
+            <li><a th:href="@{/os}">OS</a> </li>
         </ul>
     </nav>
 </div>
@@ -24,7 +25,7 @@
     </thead>
     <tbody>
     <tr th:each="pizza : ${pizzas}" th:object="${pizza}">
-        <td th:text="*{naam}"></td>
+        <td> <a th:text="*{naam}" th:href="@{/pizzas/{id}(id=*{id})}"></a></td>
         <td th:text="*{prijs}" class="getal"></td>
         <td><th:block th:if="*{pikant}">pikant</th:block> </td>
     </tr>
