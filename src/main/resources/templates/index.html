@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="nl" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments::head(title='Pizza Luigi')"></head>
+<p>Aantal bezoeken: <th:block th:text="${aantalBezoeken}"></th:block>.</p>
 <body>
 <nav th:replace="fragments::menu"></nav>
 <h1>Pizza Luigi</h1>

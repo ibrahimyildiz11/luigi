@@ -10,10 +10,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Controller
 @RequestMapping("/")
 class IndexController {
+    private final AtomicInteger aantalBezoeken = new AtomicInteger();
     @GetMapping
     public ModelAndView index() {
         var morgenOfMiddag = LocalTime.now().getHour() < 12 ? "morgen" : "middag";
@@ -22,6 +24,8 @@ class IndexController {
                 new Persoon("Luigi", "Peperone",7, true, LocalDate.of
                         (1966,1,31),
                         new Adres("Grote markt", "3",9700, "Oudenaarde")));
+
+        modelAndView.addObject("aantalBezoeken", aantalBezoeken.incrementAndGet());
         return modelAndView;
     }
 }
