@@ -1,6 +1,7 @@
 package be.vdab.luigi.restclients;
 
 import be.vdab.luigi.exceptions.KoersClientException;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -9,7 +10,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.regex.Pattern;
 
-@Component class FixerKoersClient implements KoersClient {
+@Component
+@Qualifier("Fixer")
+class FixerKoersClient implements KoersClient {
     private static final Pattern PATTERN = Pattern.compile("^.*\"USD\": *(\\d+\\.?\\d*).*$");
     private final URL url;
     FixerKoersClient() {
