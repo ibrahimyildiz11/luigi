@@ -123,4 +123,14 @@ extends AbstractTransactionalJUnit4SpringContextTests {
         assertThat(repository.findByIds(Set.of(-1L))).isEmpty();
     }
 
+    @Test
+    void aantalPizzasPerPrijs() {
+        var aantalPizzasPerPrijs = repository.findAantalPizzasPerPrijs();
+        assertThat(aantalPizzasPerPrijs).hasSize(super.jdbcTemplate.queryForObject(
+                "select count(distinct prijs) from pizzas", Integer.class));
+        var rij1 = aantalPizzasPerPrijs.get(0);
+        assertThat(rij1.aantal())
+                .isEqualTo(super.countRowsInTableWhere(PIZZAS, "prijs = " + rij1.prijs()));
+    }
+
 }
